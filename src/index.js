@@ -40,8 +40,8 @@ const RBSheet = forwardRef((props, ref) => {
 
   // Exposing component methods to parent via useImperativeHandle hook
   useImperativeHandle(ref, () => ({
-    open: () => handleSetVisible(true),
-    close: () => handleSetVisible(false),
+    open: (openArgs) => handleSetVisible(true, openArgs),
+    close: (closeArgs) => handleSetVisible(false, closeArgs),
   }));
 
   // Function to create PanResponder
@@ -83,12 +83,12 @@ const RBSheet = forwardRef((props, ref) => {
   const panResponder = useRef(createPanResponder()).current;
 
   // Function to handle the visibility of the modal
-  const handleSetVisible = visible => {
+  const handleSetVisible = (visible, otherParams=undefined) => {
     if (visible) {
       setModalVisible(visible);
       // Call onOpen callback if provided
       if (typeof onOpen === 'function') {
-        onOpen();
+        onOpen(otherParams);
       }
       // Animate height on open
       Animated.timing(animatedHeight, {
@@ -108,7 +108,7 @@ const RBSheet = forwardRef((props, ref) => {
         pan.setValue({x: 0, y: 0});
         // Call onClose callback if provided
         if (typeof onClose === 'function') {
-          onClose();
+          onClose(otherParams);
         }
       });
     }
