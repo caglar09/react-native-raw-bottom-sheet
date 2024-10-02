@@ -86,12 +86,12 @@ interface RBSheetProps {
   /**
    * Callback function that will be called after the bottom sheet has been opened.
    */
-  onOpen?: (openArgs:any) => void;
+  onOpen?: (openArgs?:any) => void;
 
   /**
    * Callback function that will be called after the bottom sheet has been closed.
    */
-  onClose?: (closeArgs:any) => void;
+  onClose?: (closeArgs?:any) => void;
 
   /**
    * Your own compoent.
@@ -103,12 +103,12 @@ interface RBSheetRef {
   /**
    * The method to open bottom sheet.
    */
-  open: (openArgs:any) => void;
+  open: (openArgs?:any) => void;
 
   /**
    * The method to close bottom sheet.
    */
-  close: (closeArgs:any) => void;
+  close: (closeArgs?:any) => void;
 }
 
 declare const RBSheet: React.ForwardRefExoticComponent<
